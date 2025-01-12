@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Janus WebRTC Server (multistream): Video Room Demo</title>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/webrtc-adapter/8.2.3/adapter.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.2/js/bootstrap.min.js"></script>
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.js"></script>
+    <script type="text/javascript" src="./settings.js"></script>
+    <script type="text/javascript" src="./janus.js"></script>
+    <script type="text/javascript" src="./videoroom.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/5.3.2/cerulean/bootstrap.min.css"
+        type="text/css" />
+    <link rel="stylesheet" href="./demo.css" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css" />
+</head>
+
+<body style="padding-top: 20px;">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pb-2 mt-4 mb-2 border-bottom">
+                    <h1>Видео комната
+                        <button class="btn btn-secondary" autocomplete="off" id="start">Начать</button>
+                    </h1>
+                </div>
+                <div class="container mt-4 hide" id="videojoin">
+                    <div class="row">
+                        <span class="badge bg-info" id="you"></span>
+                        <div class="col-md-12" id="controls">
+                            <div class="input-group mt-3 mb-1 hide" id="registernow">
+                                <span class="input-group-text"><i class="fa-solid fa-user"></i></span>
+                                <input autocomplete="off" class="form-control" type="text"
+                                    placeholder="Выберите Ваше имя" id="username"
+                                    onkeypress="return checkEnter(this, event);" />
+                                <span class="input-group-btn">
+                                    <button class="btn btn-success" autocomplete="off"
+                                        id="register">Присоединиться</button>
+                                    <input type="text" id="roomIdInput" placeholder="Enter room ID">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="container mt-4 hide" id="videos">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="card-title">Ваше видео <span class="badge bg-primary hide"
+                                            id="publisher"></span>
+                                    </span>
+                                </div>
+                                <div class="card-body" id="videolocal"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="badge bg-info hide" id="remote1"></span>
+                                </div>
+                                <div class="card-body relative" id="videoremote1"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="badge bg-info hide" id="remote2"></span>
+                                </div>
+                                <div class="card-body relative" id="videoremote2"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="badge bg-info hide" id="remote3"></span>
+                                </div>
+                                <div class="card-body relative" id="videoremote3"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="badge bg-info hide" id="remote4"></span>
+                                </div>
+                                <div class="card-body relative" id="videoremote4"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="badge bg-info hide" id="remote5"></span>
+                                </div>
+                                <div class="card-body relative" id="videoremote5"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
