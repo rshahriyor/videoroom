@@ -542,21 +542,19 @@ function toggleMute() {
 	else
 		sfutest.muteAudio();
 	muted = sfutest.isAudioMuted();
-	$('#mute').html(muted ? "Выключить аудио" : "Включить аудио");
+	$('#mute').html(muted ? "Включить аудио" : "Выключить аудио");
 }
 
 function toggleVideo() {
-    let videoMuted = sfutest.isVideoMuted(); // Проверяем, отключено ли видео
+    let videoMuted = sfutest.isVideoMuted();
     Janus.log((videoMuted ? "Enabling" : "Disabling") + " local video...");
-    
     if (videoMuted) {
-        sfutest.unmuteVideo(); // Включаем видео, если оно было отключено
+        sfutest.unmuteVideo();
     } else {
-        sfutest.muteVideo(); // Выключаем видео
+        sfutest.muteVideo();
     }
-    
-    videoMuted = sfutest.isVideoMuted(); // Обновляем состояние
-    $('#mutevideo').html(videoMuted ? "Выключить видео" : "Включить видео"); // Обновляем текст кнопки
+    videoMuted = sfutest.isVideoMuted();
+    $('#mutevideo').html(videoMuted ? "Включить видео" : "Выключить видео");
 }
 
 // eslint-disable-next-line no-unused-vars
