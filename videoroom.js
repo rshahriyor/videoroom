@@ -352,8 +352,8 @@ $(document).ready(function() {
 										$('#videolocal').append('<button class="btn btn-warning btn-sm bottom-left m-2" id="mute">Выключить аудио</button>');
 										$('#mute').click(toggleMute);
 										// Add an 'unpublish' button
-										$('#videolocal').append('<button class="btn btn-warning btn-sm bottom-right m-2" id="unpublish">Отключиться</button>');
-										$('#unpublish').click(unpublishOwnFeed);
+										$('#videolocal').append('<button class="btn btn-warning btn-sm bottom-right m-2" id="mutevideo">Выключить видео</button>');
+										$('#mutevideo').click(toggleVideo);
 									}
 									if(track.kind === "audio") {
 										// We ignore local audio tracks, they'd generate echo anyway
@@ -542,14 +542,21 @@ function toggleMute() {
 	else
 		sfutest.muteAudio();
 	muted = sfutest.isAudioMuted();
-	$('#mute').html(muted ? "Unmute" : "Mute");
+	$('#mute').html(muted ? "Выключить аудио" : "Включить аудио");
 }
 
-function unpublishOwnFeed() {
-	// Unpublish our stream
-	$('#unpublish').attr('disabled', true).unbind('click');
-	let unpublish = { request: "unpublish" };
-	sfutest.send({ message: unpublish });
+function toggleVideo() {
+    let videoMuted = sfutest.isVideoMuted(); // Проверяем, отключено ли видео
+    Janus.log((videoMuted ? "Enabling" : "Disabling") + " local video...");
+    
+    if (videoMuted) {
+        sfutest.unmuteVideo(); // Включаем видео, если оно было отключено
+    } else {
+        sfutest.muteVideo(); // Выключаем видео
+    }
+    
+    videoMuted = sfutest.isVideoMuted(); // Обновляем состояние
+    $('#mutevideo').html(videoMuted ? "Выключить видео" : "Включить видео"); // Обновляем текст кнопки
 }
 
 // eslint-disable-next-line no-unused-vars
